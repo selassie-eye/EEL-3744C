@@ -1,0 +1,29 @@
+Define clock control/status and IOREG codes as constants
+DEFINE PERIOD_L as constant "0x00"
+DEFINE PERIOD_H as constant "0xFF"
+DEFINE C0_CTRL as constant "0x07"
+
+BEGIN MAIN
+	LOAD 4 registers used in CLKSEL with codes for 2 MHz clock
+	CALL CLKSEL
+	CALL CNTCFG_C0
+	SET PORTC to output
+	WHILE true
+		OUTPUT TCCO_CNTL to PORTC
+	END WHILE
+END MAIN
+	
+BEGIN CLKSEL
+	SET CPU_CCP to IOREG (0xD8)
+	WHILE OSC_STATUS is ~(status constant for desired clock)
+	END WHILE
+	SET OSC_CTRL to (control constant for desired clock)
+	SET CLK_PSCTRL to (chosen prescalar settings)
+	SET CLK_CTRL to (control constant for desired clock)
+END CLKSEL
+
+BEGIN CNTCFG_C0
+	LOAD PERIOD_L into TCC0_PERL
+	LOAD PERIOD_H into TCC0_PERH
+	LOAD C0_CTRL into TCC0_CTRLA
+END CNTCFG_C0

@@ -1,0 +1,106 @@
+2.2 What is the advantage of a relocatable assembler compared to an absolute
+assembler?
+    A relocatable assembler allows you to develop application software in modules that are
+    linked together to create the program to go into the ROM.
+
+2.3  What is a microcontroller memory map?
+    A memory map shows the organization of addresses for each type of memory.
+
+2.12 Why must a three-state gate be used to interface an input device to the data bus?
+    The input device sends a high impedance signal to the data bus when not in use so that a non-active signal is not misinterpreted.
+
+2.17 Design an instruction decoder as shown in Figure 2-13 using AND. OR. and inverter
+gates to decode the 3-bit opcodes and produce a control signal asserted by each of the
+operations given in Table 2-5.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3.2. What are the three basic elements of structured programming?
+    Simple structures that minimize the number of programming element interactions
+    Minimizing program segment sizes
+    Hierarchical organization of the solution.
+
+3.3. Write the pseudocode and draw the flowchan symbol to represent the decislon [f A l-'
+TRUE THE B ELSE C.
+    IF A is TRUE
+        THEN B
+        ELSE C
+
+3.7. Use structured flowcharts or pseudocode to \Hite 3 de ign thaI wtillmplemenl the ~ \-
+lowi ng problem description:
+
+DO
+    IF BUF is NULL
+        THEN 
+            prompt user for keyboard input
+            save input in BUF
+    ENDIF (BUF is NULL)
+    IF BUF is alphabetic
+        THEN
+            change case of BUF
+    ENDIF (BUF is alphabetic)
+    IF BUF is alphanumeric
+        THEN
+            print BUF
+            clear BUF
+        ELSE
+            beep bell
+            clear BUF
+    ENDIF (BUF is alphanumeric)
+WHILE ESC not pressed
+
+4.5 What is the meaning of sign bit = 1 when unsigned binary coded numbers are added?
+    It is treated like a normal positive binary digit.
+
+4.6 What is the meaning of sign bit = 1 when two's-complement binary coded numbers are added?
+    The result is negative.
+
+4.7 What is the meaning of carry bit = 1 when unsigned binary coded numbers are added?
+    The result is larger than what can be expressed with the number of digits (overflow)
+
+4.11 What is the meaning of two's-complement overflow bit = 1 when unsigned binary coded numbers are added?
+    A carry was required for the operation.
+
+4.12 What is the meaning of two's-complement overflow bit = 1 when two's-complement binary coded numbers are added?
+    It means that a carry or a borrow was required for the operation, depending on whether subtraction or addition was performed.
+
+5.1 List the addressing modes available in the CPU you are studying.
+5.2 Briefly explain the following terms: physical address, effective address, memory map.
+    Physical Address - Actual memory location.
+    Effective Address - Memory location computed by the processor.
+    Memory Map - Organization of addresses for each type of memory. 
+
+5.9 To increase the memory address space in a computer system. one must (a) increase
+the number of data lines. (b) increase the number of read and write control bits going
+to the memory, (c) increase the number of address lines.
+    C
+
+5.10 A pointer is (a) an area in memory used for address storage. (b) a memory address
+held in a register, (c) a subroutine address held in the stack pointer
+    B
+
+5.11 A register indirect address instruction (a) has the address of the operand in the
+instruction. (b) has the address of the operand in a register. (c) uses the program
+counter to calculate the offset address of the operand.
+    B

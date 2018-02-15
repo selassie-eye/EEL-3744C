@@ -1,0 +1,96 @@
+DEFINE EBI_CTRL constant "0x41"
+DEFINE EBI_CS0_CTRLA constant "0x42"
+DEFINE EBI_CS0_CTRLB constant "0x06"
+DEFINE EBI_CS0_BASEADDR constant "0x2000"
+DEFINE TDATA constant "0xA5"
+DEFINE TDATA_ADDR constant "0x04"
+
+DEFINE PORTH pins as appropriate control signals
+
+BEGIN MAIN
+	CALL EBICONFIG
+	SET CS0 to 0
+
+	// Load value for writing
+	LOAD TDATA into R18
+	WHILE true
+		LOAD TDATA_ADDR into Z  // Load high and low bytes individually
+		CALL WRITE
+		LOAD TDATA_ADDR into Z
+		CALL READ		// Read operation results stored in R16
+	END WHILE
+END MAIN	
+
+BEGIN MEMADDRLD
+	SET PORTK to ZL
+	INC Z
+END MEMADDRLD
+	
+BEGIN WRITE
+	CALL MEMADDRLD
+	SET PORTJ to R18	// Low byte to be written
+	LSR R18			// Mask out low byte
+	CALL WRTGL
+	CALL MEMADDRLD
+	SET J[3-0] to R18	// High byte to be written
+	CALL WRTGL
+END WRITE
+	
+BEGIN WRTGL
+	SET CS to 0
+	SET ALE to 1
+	SET WE to 0
+	// Just in case
+	NOP
+	NOP
+	NOP
+	NOP
+	NOP
+	SET CS to 1
+	SET ALE to 0
+	SET WE to 0
+END WRTGL
+
+BEGIN READ
+	CALL MEMADDRLD
+	CALL RDTGL
+	LOAD PORTJ into R16	// Low byte read
+	CALL MEMADDRLD
+	CALL RDTGL
+	LOAD PORTJ into R17	// High byte read
+	LSL R17			// Shifted to its correct position
+	ADD R16, R17		// Concatenate both bits
+	CLR R17
+END READ
+
+BEGIN RDTGL
+	SET CS to 0
+	SET ALE to 0
+	SET RE to 1
+	NOP
+	NOP
+	NOP
+	NOP
+	SET CS to 1
+	SET ALE to 0
+	SET RE to 0
+END RDTGL
+
+BEGIN EBICONFIG
+	SET EBI_CTRL to constant defined above
+	SET EBI_CS0_CTRLA to constant defined above
+	SET EBI_CS0_BASEADDR to constant defined above
+	SET PORTH to output for control signals
+	SET PORTK to output for address signal
+
+	// Control signals predefined above
+	SET CS to 1
+	SET WE to 1
+	SET RE to 1
+	SET ALE to 0
+	SET CS3 to 1
+	SET CS2 to 1
+	SET CS1 to 1
+	SET CS0 to 1
+END EBICONFIG
+	

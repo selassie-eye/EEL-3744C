@@ -1,0 +1,21 @@
+Define clock control/status and IOREG codes as constants
+Define CLKEVOUT code for PORTC_6 output ("00000001")
+
+BEGIN MAIN
+	CALL CLKSEL
+	SET PORTC_7 to output
+	SET PORTCFG_CLKEVOUT to constant defined above
+	WHILE true
+	END WHILE
+END MAIN
+
+BEGIN CLKSEL
+	SET CPU_CCP to IOREG (0xD8)
+	WHILE OSC_STATUS is ~(status constant for desired clock)
+	END WHILE
+	SET OSC_CTRL to (control constant for desired clock)
+	SET CLK_PSCTRL to (chosen prescalar settings)
+	SET CLK_CTRL to (control constant for desired clock)
+END CLKSEL
+
+	
